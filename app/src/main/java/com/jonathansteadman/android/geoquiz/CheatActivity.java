@@ -16,6 +16,7 @@ public class CheatActivity extends Activity {
             ".answer_is_true";
     public static final String EXTRA_ANSWER_SHOWN = "com.jonathansteadman.android.geoquiz" +
             ".answer_shown";
+    public static final String EXTRA_TEXTVIEW = "com.jonathansteadman.android.extra_textview";
 
     private boolean mAnswerIsTrue;
 
@@ -37,9 +38,6 @@ public class CheatActivity extends Activity {
 
         mAnswerTextView = (TextView) findViewById(R.id.answerTextView);
 
-        // Answer will not be shown until the user presses the button
-        setAnswerShownResult(false);
-
         mShowAnswer = (Button) findViewById(R.id.showAnswerButton);
         mShowAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,5 +50,20 @@ public class CheatActivity extends Activity {
                 setAnswerShownResult(true);
             }
         });
+
+        if (savedInstanceState != null) {
+            String storedAnswer = savedInstanceState.getString(EXTRA_TEXTVIEW);
+            mAnswerTextView.setText(storedAnswer);
+            setAnswerShownResult(savedInstanceState.getBoolean(EXTRA_ANSWER_SHOWN));
+        } else { // When CheatActivity initially launches
+            // Answer will not be shown until the user presses the button
+            setAnswerShownResult(false);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString(EXTRA_TEXTVIEW, mAnswerTextView.getText().toString());
     }
 }
