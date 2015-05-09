@@ -54,7 +54,7 @@ public class CheatActivity extends Activity {
         if (savedInstanceState != null) {
             String storedAnswer = savedInstanceState.getString(EXTRA_TEXTVIEW);
             mAnswerTextView.setText(storedAnswer);
-            setAnswerShownResult(savedInstanceState.getBoolean(EXTRA_ANSWER_SHOWN));
+            setAnswerShownResult(true);
         } else { // When CheatActivity initially launches
             // Answer will not be shown until the user presses the button
             setAnswerShownResult(false);
