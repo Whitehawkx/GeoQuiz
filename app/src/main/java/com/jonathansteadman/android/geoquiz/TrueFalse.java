@@ -8,9 +8,12 @@ public class TrueFalse {
 
     private boolean mTrueQuestion;
 
-    public TrueFalse(int question, boolean trueQuestion) {
+    private boolean mUserCheated;
+
+    public TrueFalse(int question, boolean trueQuestion, boolean userCheated) {
         mQuestion = question;
         mTrueQuestion = trueQuestion;
+        mUserCheated = userCheated;
     }
 
     public int getQuestion() {
@@ -27,5 +30,13 @@ public class TrueFalse {
 
     public void setTrueQuestion(boolean trueQuestion) {
         mTrueQuestion = trueQuestion;
+    }
+
+    public boolean isUserCheated() {
+        return mUserCheated;
+    }
+
+    public void setUserCheated(boolean userCheated) {
+        mUserCheated = userCheated;
     }
 }

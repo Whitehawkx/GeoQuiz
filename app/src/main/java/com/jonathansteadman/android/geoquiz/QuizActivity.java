@@ -32,11 +32,11 @@ public class QuizActivity extends Activity {
     private TextView mQuestionTextView;
 
     private TrueFalse[] mQuestionBank = new TrueFalse[]{
-            new TrueFalse(R.string.question_oceans, true),
-            new TrueFalse(R.string.question_mideast, false),
-            new TrueFalse(R.string.question_africa, false),
-            new TrueFalse(R.string.question_americas, true),
-            new TrueFalse(R.string.question_asia, true),
+            new TrueFalse(R.string.question_oceans, true, false),
+            new TrueFalse(R.string.question_mideast, false, false),
+            new TrueFalse(R.string.question_africa, false, false),
+            new TrueFalse(R.string.question_americas, true, false),
+            new TrueFalse(R.string.question_asia, true, false),
     };
 
     private int mCurrentIndex = 0;
@@ -53,7 +53,7 @@ public class QuizActivity extends Activity {
 
         int messageResId = 0;
 
-        if (mIsCheater) {
+        if (mIsCheater || mQuestionBank[mCurrentIndex].isUserCheated() == true) {
             messageResId = R.string.judgement_toast;
         } else {
             if (userPressedTrue == answerIsTrue) {
@@ -142,6 +142,10 @@ public class QuizActivity extends Activity {
             return;
         }
         mIsCheater = data.getBooleanExtra(CheatActivity.EXTRA_ANSWER_SHOWN, false);
+
+        if (mIsCheater) {
+            mQuestionBank[mCurrentIndex].setUserCheated(true);
+        }
     }
 
     @Override
