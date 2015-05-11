@@ -2,6 +2,7 @@ package com.jonathansteadman.android.geoquiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,10 +24,17 @@ public class CheatActivity extends Activity {
     private TextView mAnswerTextView;
     private Button mShowAnswer;
 
+    private TextView mApiTextView;
+
     private void setAnswerShownResult(boolean isAnswerShown) {
         Intent data = new Intent();
         data.putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown);
         setResult(RESULT_OK, data);
+    }
+
+    private void apiLevel(int api) {
+        mApiTextView = (TextView) findViewById(R.id.api_level_text_view);
+        mApiTextView.setText("API Level " + api);
     }
 
     @Override
@@ -59,6 +67,8 @@ public class CheatActivity extends Activity {
             // Answer will not be shown until the user presses the button
             setAnswerShownResult(false);
         }
+
+        apiLevel(Build.VERSION.SDK_INT);
     }
 
     @Override

@@ -4,6 +4,7 @@ package com.jonathansteadman.android.geoquiz;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -32,6 +33,8 @@ public class QuizActivity extends Activity {
 
     private TextView mQuestionTextView;
 
+    private TextView mApiTextView;
+
     private TrueFalse[] mQuestionBank = new TrueFalse[]{
             new TrueFalse(R.string.question_oceans, true, false),
             new TrueFalse(R.string.question_mideast, false, false),
@@ -47,6 +50,11 @@ public class QuizActivity extends Activity {
     private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getQuestion();
         mQuestionTextView.setText(question);
+    }
+
+    private void apiLevel(int api) {
+        mApiTextView = (TextView) findViewById(R.id.api_level_text_view);
+        mApiTextView.setText("API Level " + api);
     }
 
     private void checkAnswer(boolean userPressedTrue) {
@@ -138,6 +146,7 @@ public class QuizActivity extends Activity {
         }
 
         updateQuestion();
+        apiLevel(Build.VERSION.SDK_INT);
     }
 
     @Override
